@@ -13,6 +13,10 @@ class UsersController < ApplicationController
   end
 
   def get_token
-    render json: {token: "token"}
+    if user = User.find_by_username(params[:username]).try(:authenticate, params[:password])
+      render json: {token: user.token}
+    else
+      render json: {token: 'nope'}, status: :unauthorized
+    end
   end
 end

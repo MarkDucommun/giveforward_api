@@ -20,10 +20,24 @@ describe 'User' do
   end
 
   context 'that already exists' do
-    let(:user){ Factory.create(:user) }
+    let(:user){ FactoryGirl.create(:user) }
 
     it 'can authenticate with username and password to recieve a token' do
+      post get_token_users_path, {
+        username: user.username,
+        password: 'password'
+      }
 
+      expect(JSON.parse(last_response.body)['token']).to eq user.token
+    end
+
+    it 'receives a 401 status if invalid' do
+      post get_token_users_path, {
+        username: user.username,
+        password: 'wrong'
+      }
+      
+      expect(last_response.status).to be 401
     end
   end
 end
