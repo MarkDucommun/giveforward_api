@@ -1,0 +1,7 @@
+# GiveForward API
+
+Sign up with a username and a password to receive a user token.
+
+Set the user token in the environment which you will be making api calls from.
+
+Make API calls!
