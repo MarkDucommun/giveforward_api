@@ -4,15 +4,15 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.create(params[:user])
-    redirect_to user_path(user)
+    @user = User.create(params[:user])
+    render :show
   end
 
   def show
     if user = User.find_by_token(params[:token])
       render json: { user: user.to_json }
     else
-      render :show
+      render json: {token: 'nope'}, status: :unauthorized
     end
   end
 
