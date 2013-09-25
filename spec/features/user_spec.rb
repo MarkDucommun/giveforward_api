@@ -31,13 +31,26 @@ describe 'User' do
       expect(JSON.parse(last_response.body)['token']).to eq user.token
     end
 
-    it 'receives a 401 status if invalid' do
+    it 'receives a 401 status if invalid authentication request is made' do
       post get_token_users_path, {
         username: user.username,
         password: 'wrong'
       }
       
       expect(last_response.status).to be 401
+    end
+    
+    let(:fundraiser) { FactoryGirl.create(:fundraiser) }
+
+    it 'can retrieve owned fundraisers' do
+      get owned_fundraisers_path, {token: fundraiser.owner.token}
+
+      expect(JSON.parse(last_response.body).size).to be 1
+      expect(last_response.body.include?('test')).to be_true
+    end
+
+    it 'can retrieve followed fundraisers' do
+
     end
   end
 end

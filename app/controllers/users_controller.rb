@@ -9,7 +9,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    if user = User.find_by_token(params[:token])
+      
+    else
+
+    end
   end
 
   def get_token

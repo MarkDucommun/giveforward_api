@@ -6,7 +6,12 @@ GiveforwardApi::Application.routes.draw do
     end
   end
 
-  resources :fundraisers
+  resources :fundraisers do
+    collection do
+      get 'followed'
+      get 'owned'
+    end
+  end
 
   root to: 'users#new'
 

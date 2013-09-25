@@ -1,6 +1,9 @@
 class User < ActiveRecord::Base
-  attr_accessible :username, :password, :password_confirmation
+  has_many :created_fundraisers, class_name: "Fundraiser", foreign_key: :owner_id
+
   has_secure_password
+
+  attr_accessible :username, :password, :password_confirmation
 
   before_validation :create_token
 

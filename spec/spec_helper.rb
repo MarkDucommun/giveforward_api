@@ -1,28 +1,30 @@
 require File.expand_path("../../config/environment", __FILE__)
 require 'simplecov'
+
+ENV["RAILS_ENV"] ||= 'test'
 require 'rack/test'
 require 'capybara'
 require 'database_cleaner'
 require 'rspec/rails'
 require 'rspec/autorun'
 require 'factory_girl_rails'
-ENV["RAILS_ENV"] ||= 'test'
+require 'shoulda-matchers'
 
 # this loads all the files in the support directory
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 SimpleCov.start do
-    add_filter '/spec/'
-    add_filter '/config/'
-    add_filter '/lib/'
-    add_filter '/vendor/'
+  add_filter '/spec/'
+  add_filter '/config/'
+  add_filter '/lib/'
+  add_filter '/vendor/'
 
-    add_group 'Controllers', 'app/controllers'
-    add_group 'Models', 'app/models'
-    add_group 'Helpers', 'app/helpers'
-    add_group 'Mailers', 'app/mailers'
-    add_group 'Views', 'app/views'
-  end
+  add_group 'Controllers', 'app/controllers'
+  add_group 'Models', 'app/models'
+  add_group 'Helpers', 'app/helpers'
+  add_group 'Mailers', 'app/mailers'
+  add_group 'Views', 'app/views'
+end
 
 RSpec.configure do |config|
 

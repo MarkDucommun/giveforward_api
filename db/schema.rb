@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130925154853) do
+ActiveRecord::Schema.define(:version => 20130925175221) do
+
+  create_table "fundraisers", :force => true do |t|
+    t.integer  "owner_id",                   :null => false
+    t.string   "name",                       :null => false
+    t.text     "description",                :null => false
+    t.integer  "goal",        :default => 0
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "username",        :null => false
