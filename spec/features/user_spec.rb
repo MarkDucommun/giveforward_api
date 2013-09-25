@@ -50,7 +50,11 @@ describe 'User' do
     end
 
     it 'can retrieve followed fundraisers' do
-
+      fundraiser.donations.create(follower: user, amount: 10)
+      get followed_fundraisers_path, { token: user.token }
+      
+      expect(JSON.parse(last_response.body).size).to be 1
+      expect(last_response.body.include?('test')).to be_true
     end
   end
 end

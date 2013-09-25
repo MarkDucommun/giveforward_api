@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130925175221) do
+ActiveRecord::Schema.define(:version => 20130925202134) do
+
+  create_table "donations", :force => true do |t|
+    t.integer  "follower_id",                  :null => false
+    t.integer  "fundraiser_id",                :null => false
+    t.integer  "amount",        :default => 0
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+  end
 
   create_table "fundraisers", :force => true do |t|
     t.integer  "owner_id",                   :null => false

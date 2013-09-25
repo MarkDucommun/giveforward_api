@@ -24,6 +24,14 @@ class FundraisersController < ApplicationController
     end
   end
 
+  def follow
+    if user = User.find_by_token(params[:token])
+      user.donations.create(amount: params[:amount], project: Project.find(params[:id]))
+    else
+      render json: {fundraiser: 'nope'}, status: 401
+    end
+  end
+
   def followed
     if user = User.find_by_token(params[:token])
       render json: {fundraisers: user.followed_fundraisers.to_json}

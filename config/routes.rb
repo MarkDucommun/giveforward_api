@@ -7,6 +7,10 @@ GiveforwardApi::Application.routes.draw do
   end
 
   resources :fundraisers do
+    member do
+      post 'follow'
+    end
+
     collection do
       get 'followed'
       get 'owned'

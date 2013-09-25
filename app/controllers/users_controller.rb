@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
   def show
     if user = User.find_by_token(params[:token])
-      
+      render json: { user: user.to_json }
     else
 
     end

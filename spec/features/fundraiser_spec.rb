@@ -36,7 +36,6 @@ describe 'Fundraiser' do
     let(:fundraiser) { FactoryGirl.create(:fundraiser) }
 
     it 'can be retrieved with a valid token' do
-      puts fundraiser_path(fundraiser)
       get fundraiser_path(fundraiser), { token: user.token }
       expect( last_response.body.include?('test')).to be_true
     end
@@ -44,6 +43,13 @@ describe 'Fundraiser' do
     it 'cannot be retrieved without a valid token' do
       get fundraiser_path(fundraiser), {token: 'wrong'}
       expect( last_response.status ).to be 401
+    end
+
+    it 'can be followed with a valid token' do
+      post follow_fundraiser_path(fundraiser), {
+        token: user.token,
+        amount: 10
+      }
     end
   end
 end
